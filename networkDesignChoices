@@ -1,0 +1,20 @@
+All of the network parameters used by the authors are on page 2 of the supplement.
+
+My problem most closely resembes the solar system in terms of input, output, and latent neurons.
+
+However, since the function is harder, I'll start with a larger Encoder / Decoder. 
+In fact, I will choose the largest parameters they used for each hidden layer ([500, 100], [100, 150]). 
+Hopefully that will be enough. If there are significant overfitting problems, I might shrink these.
+
+ELU irregularities will be used throughout, as they were in the original.
+
+$\beta$ is initialized at 1e-2 (normal for Solar System); I'll chanigh this up if needed.
+Learning rate will be initialized at 1e-4 for now.
+
+Continuing with the "Solar System" parallel, I will just randomly generate the data at the start before testing. 
+
+The alternative setup will include generatinge everything ahead of time. 
+We'll see if that is necessary.
+
+Loss function is from S4 equation 1
+
