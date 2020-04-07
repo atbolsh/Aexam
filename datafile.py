@@ -7,7 +7,7 @@ def phi(w,b):
     return np.arctan2(2*w*b,(1-w**2))
 
 def amplitude(w, b):
-    """Computes amplitude.
+    """Computes amplitude^2.
     w = \omega, b = \gamma
     Both can be numpy arrays, for convenience."""
     return 1.0/np.sqrt(4*(w**2)*(b**2) + (1 - w**2)**2)
@@ -30,4 +30,18 @@ def datagen(muW, muB, stdW=0.1, stdB=0.1, size=10000, eps = 1e-3):
     z = np.concatenate((w, b), axis=1)
     o = np.concatenate((P, A), axis=1)
     return z, o
+
+def log_datagen(muW, muB, stdW=0.1, stdB=0.1, size=10000, eps = 1e-3):
+    # Frequencies
+    lw = np.random.randn(size, 1)*stdW + muW
+    # Damping coefficients
+    lb = np.random.randn(size, 1)*stdB + muB
+    # Results
+    P = phi(np.exp(lw), np.exp(lb)) #Since phase is bounded, no need to be concerned here at all
+    lA = np.log(amplitude(np.exp(lw), np.exp(lb)))
+    # Concatenation
+    z = np.concatenate((lw, lb), axis=1)
+    o = np.concatenate((P, lA), axis=1)
+    return z, o
+
 

@@ -57,7 +57,7 @@ class bVAE(nn.Module):
         recon = (y - output)**2
         var = torch.exp(logvar)
         KL = mu**2 + var - logvar
-        return torch.sum(recon + (self.beta / 2)*KL)
+        return torch.sum(recon) + (self.beta / 2)*torch.sum(KL)
  
 
 
